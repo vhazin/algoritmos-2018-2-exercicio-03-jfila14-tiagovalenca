@@ -49,12 +49,12 @@ void remover(struct Lista *lista, int *value){
           lista->dados = auxiliar->proximo;
           free(auxiliar);
           lista->tamanho = lista->tamanho - 1;
-          break;
+          return;
         } else{
           anterior->proximo = auxiliar->proximo;
           free(auxiliar);
           lista->tamanho = lista->tamanho -1;
-          break;          
+          return;          
         }
       }
       anterior = auxiliar;
@@ -67,6 +67,7 @@ void print_list(struct Lista *lista){
     for(temp = lista->dados; temp != NULL; temp = temp->proximo){
         printf("%i ", temp->data);
     }
+    return;
 }
 
 int main(void) {
