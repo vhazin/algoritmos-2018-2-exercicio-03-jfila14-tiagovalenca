@@ -39,24 +39,26 @@ int adicionar(struct Lista *lista, int *info){
   return(lista->tamanho);
 }
 
-int remover(struct Lista *lista, int *info){
-  struct Elemento *anterior, *auxiliar;
-  int *volta;
-  auxiliar = lista->dados;
-  while(auxiliar != NULL){
-    if(auxiliar->data == *info){
-      if (anterior == NULL){
-        lista->dados = auxiliar->proximo;
-      }else{
-        anterior->proximo = auxiliar->proximo;
+void remover(struct Lista *lista, int *value){
+    struct Elemento *auxiliar = lista->dados;
+    struct Elemento *anterior = NULL;
+
+    for(auxiliar = lista->dados; auxiliar != NULL; auxiliar = auxiliar->proximo){
+      if(auxiliar->data == *value){
+        if (anterior == NULL){
+          lista->dados = auxiliar->proximo;
+          free(auxiliar);
+          lista->tamanho = lista->tamanho - 1;
+          break;
+        } else{
+          anterior->proximo = auxiliar->proximo;
+          free(auxiliar);
+          lista->tamanho = lista->tamanho -1;
+          break;          
+        }
       }
-      lista->tamanho = lista->tamanho - 1;
-      return(1);
+      anterior = auxiliar;
     }
-    anterior = auxiliar;
-    auxiliar = auxiliar->proximo;
-  }
-  return(0);
 }
 
 void print_list(struct Lista *lista){
