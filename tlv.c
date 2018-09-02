@@ -32,9 +32,11 @@ int adicionar(struct Lista *lista, int *info){
   if(lista->dados == NULL){
     lista->dados = novo;
     lista->ultimo = novo;
+    novo->proximo = NULL;
   }else{
     lista->ultimo->proximo = novo;
     lista->ultimo = novo;
+    novo->proximo = NULL;
   }
   return(lista->tamanho);
 }
@@ -65,7 +67,11 @@ void print_list(struct Lista *lista){
     struct Elemento *temp = lista->dados;
 
     for(temp = lista->dados; temp != NULL; temp = temp->proximo){
-        printf("%i ", temp->data);
+        if(temp->proximo == NULL){
+          printf("%i", temp->data);
+        }else{
+          printf("%i ", temp->data);
+        }
     }
     return;
 }
